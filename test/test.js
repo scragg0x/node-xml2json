@@ -299,6 +299,32 @@ describe('json2xml', function () {
 
         return Promise.resolve();
     });
+
+    describe('ignore null', function () {
+
+        it('ignore null properties {ignoreNull: true}', function (done) {
+
+            var json = JSON.parse( internals.readFixture('null-properties.json') );
+            var expectedXml = internals.readFixture('null-properties-ignored.xml');
+
+            var xml = parser.toXml(json, {ignoreNull: true});
+            expect(xml).to.equal(expectedXml);
+
+            done();
+        });
+
+        it('don\'t ignore null properties (default)', function (done) {
+
+            var json = JSON.parse( internals.readFixture('null-properties.json') );
+            var expectedXml = internals.readFixture('null-properties-not-ignored.xml');
+
+            var xml = parser.toXml(json);
+            expect(xml).to.equal(expectedXml);
+
+            done();
+        });
+
+    });
 });
 
 
