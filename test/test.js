@@ -302,7 +302,7 @@ describe('json2xml', function () {
 
     describe('ignore null', function () {
 
-        it('ignore null properties {ignoreNull: true}', function (done) {
+        it('ignore null properties {ignoreNull: true}', function () {
 
             var json = JSON.parse( internals.readFixture('null-properties.json') );
             var expectedXml = internals.readFixture('null-properties-ignored.xml');
@@ -310,10 +310,10 @@ describe('json2xml', function () {
             var xml = parser.toXml(json, {ignoreNull: true});
             expect(xml).to.equal(expectedXml);
 
-            done();
+            return Promise.resolve();
         });
 
-        it('don\'t ignore null properties (default)', function (done) {
+        it('don\'t ignore null properties (default)', function () {
 
             var json = JSON.parse( internals.readFixture('null-properties.json') );
             var expectedXml = internals.readFixture('null-properties-not-ignored.xml');
@@ -321,7 +321,7 @@ describe('json2xml', function () {
             var xml = parser.toXml(json);
             expect(xml).to.equal(expectedXml);
 
-            done();
+            return Promise.resolve();
         });
 
     });
